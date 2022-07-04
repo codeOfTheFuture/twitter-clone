@@ -2,7 +2,7 @@
 const Feed: React.FC = () => {
   return (
     <div>
-      <h2>Feed</h2>
+      {/* <h2>Feed</h2> */}
     </div>
   )
 }

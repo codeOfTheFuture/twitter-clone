@@ -6,7 +6,7 @@ import Widgets from "../components/Widgets";
 
 const Home: NextPage = () => {
   return (
-    <div className="w-full h-screen flex justify-center items-center">
+    <div>
       <Head>
         <title>Twitter Clone</title>
       </Head>
