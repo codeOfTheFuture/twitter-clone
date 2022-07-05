@@ -1,5 +1,5 @@
 import { RefreshIcon } from "@heroicons/react/outline";
-import TweetBox from "./Tweetbox";
+import TweetBox from "./TweetBox";
 
 const Feed: React.FC = () => {
   return (
