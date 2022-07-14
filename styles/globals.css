@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .tweet-icon-wrapper {
+    @apply flex cursor-pointer items-center space-x-3 text-gray-400;
+  }
+
+  .tweet-icon {
+    @apply h-5 w-5;
+  }
+}

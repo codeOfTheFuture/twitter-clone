@@ -1,6 +1,7 @@
 import React from "react";
 import TimeAgo from "react-timeago";
 import { Tweet } from "../typings";
+import TweetIcons from "./TweetIcons";
 
 interface Props {
   tweet: Tweet;
@@ -40,6 +41,8 @@ const Tweet: React.FC<Props> = ({ tweet }) => {
           <img src={image} alt="" className="mt-5 mb-1 rounded-lg max-h-60 object-contain shadow-sm" />
         )}
       </div>
+
+      <TweetIcons />
     </div>
   );
 };
