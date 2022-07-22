@@ -1,11 +1,16 @@
 export default {
-  name: "comment",
-  title: "Comment",
+  name: "reply",
+  title: "Reply",
   type: "document",
   fields: [
     {
-      name: "comment",
-      title: "Comment",
+      name: "text",
+      title: "Text in reply",
+      type: "string",
+    },
+    {
+      name: "username",
+      title: "Username",
       type: "string",
     },
     {

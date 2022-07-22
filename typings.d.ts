@@ -14,11 +14,11 @@ export type TweetBody = {
   image?: string;
 };
 
-export interface Comment extends CommentBody {
+export interface Reply extends ReplyBody {
   _createdAt: string;
   _id: string;
   _rev: string;
-  _type: "comment";
+  _type: "reply";
   _updatedAt: string;
   tweet: {
     _ref: string;
@@ -26,8 +26,8 @@ export interface Comment extends CommentBody {
   };
 }
 
-export type CommentBody = {
-  comment: string;
+export type ReplyBody = {
+  text: string;
   username: string;
   profileImg: string;
   image?: string;
