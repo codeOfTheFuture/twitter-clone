@@ -6,12 +6,16 @@ import {
   UploadIcon
 } from '@heroicons/react/outline';
 
-const TweetIcons: React.FC = () => {
+interface Props {
+  replyCount: number;
+}
+
+const TweetIcons: React.FC<Props> = ({ replyCount }) => {
   return (
     <div className='flex justify-between mt-5'>
       <div className='tweet-icon-wrapper'>
         <ChatAlt2Icon className='tweet-icon' />
-        <span>5</span>
+        <span>{replyCount}</span>
       </div>
       <div className='tweet-icon-wrapper'>
         <SwitchHorizontalIcon className='tweet-icon' />

@@ -15,8 +15,6 @@ const Tweet: React.FC<Props> = ({ tweet }) => {
 
   const { _id, profileImg, username, _createdAt, text, image } = tweet;
 
-  const userHandle = username.replace(/\s+/g, "").toLowerCase();
-
   useEffect(() => {
     (async () => {
       const replies: Reply[] = await fetchReplies(_id);
@@ -25,7 +23,9 @@ const Tweet: React.FC<Props> = ({ tweet }) => {
     })();
   }, [_id]);
 
-  console.log(replies);
+  const userHandle = username.replace(/\s+/g, "").toLowerCase();
+
+  const replyCount = replies.length || 0;
 
   return (
     <div className="flex flex-col space-x-3 p-5 border-y border-gray-100">
@@ -65,7 +65,7 @@ const Tweet: React.FC<Props> = ({ tweet }) => {
         )}
       </div>
 
-      <TweetIcons />
+      <TweetIcons replyCount={replyCount} />
 
       {/* Reply Box logic */}
 

@@ -13,7 +13,7 @@ interface Props {
 const Home: NextPage<Props> = ({ tweets }) => {
   console.log(tweets);
   return (
-    <div className='lg:max-w-6xl mx-auto max-h-screen overflow-hidden'>
+    <div className='lg:max-w-6xl mx-auto h-screen overflow-hidden'>
       <Head>
         <title>Twitter Clone</title>
       </Head>
