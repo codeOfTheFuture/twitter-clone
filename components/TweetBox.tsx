@@ -7,15 +7,17 @@ import {
   PhotographIcon,
   SearchCircleIcon,
 } from "@heroicons/react/outline";
+import { useSession } from "next-auth/react";
 
 const TweetBox: React.FC = () => {
   const [input, setInput] = useState<string>("");
+  const { data: session } = useSession();
 
   return (
     <div className='flex space-x-2 p-5'>
       <div className='mt-4 h-14 w-14 relative'>
         <Image
-          src='/images/avatar-man-icon-profile-placeholder-260nw-1229859850-e1623694994111.jpg'
+          src={session?.user?.image || '/images/avatar-placeholder.jpg'}
           layout='fill'
           alt='avatar'
           className='absolute object-cover rounded-full'
@@ -40,7 +42,7 @@ const TweetBox: React.FC = () => {
               <LocationMarkerIcon className='h-5 w-5' />
             </div>
 
-            <button disabled={!input} className='bg-twitter px-5 py-2 font-bold text-white rounded-full disabled:opacity-40'>
+            <button disabled={!input || !session} className='bg-twitter px-5 py-2 font-bold text-white rounded-full disabled:opacity-40'>
               Tweet
             </button>
           </div>

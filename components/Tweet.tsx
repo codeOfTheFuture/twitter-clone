@@ -51,17 +51,19 @@ const Tweet: React.FC<Props> = ({ tweet }) => {
         </div>
       </div>
 
-      <div className="flex flex-col items-start">
-        <p className="py-1 pl-10">{text}</p>
+      <div className="flex flex-col items-start pl-10">
+        <p className="pb-2">{text}</p>
 
         {image && (
-          <Image
-            width={400}
-            height={400}
-            src={image}
-            className="mt-5 mb-1 rounded-lg max-h-60 object-cover shadow-sm"
-            alt=""
-          />
+          <div className="relative w-full h-[40rem] rounded-lg shadow-sm border">
+            <Image
+              className="rounded-lg object-center"
+              layout="fill"
+              src={image}
+              objectFit="cover"
+              alt=""
+            />
+          </div>
         )}
       </div>
 
