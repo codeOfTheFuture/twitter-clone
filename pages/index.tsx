@@ -4,7 +4,7 @@ import { Toaster } from "react-hot-toast";
 import Feed from "../components/Feed";
 import Sidebar from "../components/Sidebar";
 import Widgets from "../components/Widgets";
-import { Tweet } from "../typings";
+import { Tweet } from "../types/typings";
 import { fetchTweets } from "../utils/fetchTweets";
 
 interface Props {

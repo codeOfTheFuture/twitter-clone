@@ -11,7 +11,7 @@ export type TweetBody = {
   text: string;
   username: string;
   profileImg: string;
-  image?: string;
+  imageUrl?: string;
 };
 
 export interface Reply extends ReplyBody {

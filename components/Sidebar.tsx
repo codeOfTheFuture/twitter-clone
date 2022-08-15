@@ -18,7 +18,7 @@ const Sidebar: React.FC = () => {
   const { data: session } = useSession();
 
   return (
-    <div className="flex flex-col col-span-2 items-center px-4 md:items-start">
+    <div className="flex flex-col col-span-2 items-center px-2 md:items-start">
       <div className="h-10 w-10 m-3 relative">
         <Image src="/images/logo-twitter-icon-symbol-0.png" alt="Twitter logo" layout="fill" className="absolute" />
       </div>

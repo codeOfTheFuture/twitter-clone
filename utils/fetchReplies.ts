@@ -1,4 +1,4 @@
-import { Reply } from "../typings";
+import { Reply } from "../types/typings";
 
 export const fetchReplies = async (tweetId: string) => {
   const res = await fetch(`/api/getReplies?tweetId=${tweetId}`);

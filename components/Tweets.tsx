@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tweet } from '../typings';
+import { Tweet } from '../types/typings';
 import TweetComponent from '../components/Tweet';
 
 interface Props {

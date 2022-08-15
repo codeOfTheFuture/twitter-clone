@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import TimeAgo from "react-timeago";
-import { Reply, Tweet } from "../typings";
+import { Reply, Tweet } from "../types/typings";
 import { fetchReplies } from "../utils/fetchReplies";
 import Replies from "./Replies";
 import TweetIcons from "./TweetIcons";
@@ -13,7 +13,7 @@ interface Props {
 const Tweet: React.FC<Props> = ({ tweet }) => {
   const [replies, setReplies] = useState<Reply[]>([]);
 
-  const { _id, profileImg, username, _createdAt, text, image } = tweet;
+  const { _id, profileImg, username, _createdAt, text, imageUrl: tweetImage } = tweet;
 
   useEffect(() => {
     (async () => {
@@ -54,12 +54,12 @@ const Tweet: React.FC<Props> = ({ tweet }) => {
       <div className="flex flex-col items-start pl-10">
         <p className="pb-2">{text}</p>
 
-        {image && (
-          <div className="relative w-full h-[40rem] rounded-lg shadow-sm border">
+        {tweetImage && (
+          <div className="relative w-full h-[40rem] rounded-lg shadow-sm">
             <Image
               className="rounded-lg object-center"
               layout="fill"
-              src={image}
+              src={tweetImage}
               objectFit="cover"
               alt=""
             />

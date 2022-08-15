@@ -7,6 +7,7 @@ const nextConfig = {
       "yt3.ggpht.com",
       "pbs.twimg.com",
       "th.bing.com",
+      "cdn.sanity.io",
     ],
   },
 };

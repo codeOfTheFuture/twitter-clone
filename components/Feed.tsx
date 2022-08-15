@@ -1,5 +1,5 @@
 import { RefreshIcon } from "@heroicons/react/outline";
-import { Tweet } from "../typings";
+import { Tweet } from "../types/typings";
 import TweetBox from "./TweetBox";
 import { useState } from "react";
 import { fetchTweets } from "../utils/fetchTweets";

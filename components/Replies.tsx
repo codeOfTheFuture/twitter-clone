@@ -1,5 +1,5 @@
 import React from "react";
-import { Reply } from "../typings";
+import { Reply } from "../types/typings";
 import ReplyComponent from "./Reply";
 
 interface Props {

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import TimeAgo from "react-timeago";
-import { Reply } from "../typings";
+import { Reply } from "../types/typings";
 
 interface Props {
   reply: Reply;
