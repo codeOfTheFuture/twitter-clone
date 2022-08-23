@@ -1,21 +1,36 @@
+import React, { ChangeEvent, FC, useRef, useState } from "react";
 import Image from "next/image";
-import React, { ChangeEvent, useState } from "react";
-
 import { useSession } from "next-auth/react";
 import TweetBoxIcons from "./TweetBoxIcons";
+import TweetBoxImagePreview from "./TweetBoxImagePreview";
 
-const TweetBox: React.FC = () => {
-  const [input, setInput] = useState<string>("");
-  const { data: session } = useSession();
-  const [image, setImage] = useState<any>(null);
-  const [wrongTypeOfImage, setWrongTypeOfImage] = useState<boolean>(false);
+const TweetBox: FC = () => {
+  const { data: session } = useSession(),
+    [input, setInput] = useState<string>(""),
+    [tweetImage, setTweetImage] = useState<string | null>(null);
 
-  const addImageToTweet = (e: ChangeEvent<HTMLInputElement>): void => {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const addImageToTweet = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log("function called");
     // add image to tweet
+    const file = e.target.files?.[0] as File;
+
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        setTweetImage(reader.result as string);
+      };
+    }
   };
 
-  console.log(image);
+  const resetTweetImage = () => {
+    fileInputRef!.current!.value = "";
+    setTweetImage(null);
+  };
 
+  console.log(tweetImage);
   return (
     <div className="flex space-x-2 p-5">
       <div className="mt-4 h-14 w-14 relative">
@@ -37,13 +52,18 @@ const TweetBox: React.FC = () => {
             className="h-24 w-full text-xl outline-none placeholder:text-xl"
           />
 
-          {image && (
-            <div className="relative w-60 h-60">
-              <Image src={image} alt='' layout="fill" />
-            </div>
+          {tweetImage && (
+            <TweetBoxImagePreview
+              tweetImage={tweetImage}
+              resetTweetImage={resetTweetImage}
+            />
           )}
+
           <div className="flex items-center">
-            <TweetBoxIcons addImageToTweet={addImageToTweet} />
+            <TweetBoxIcons
+              addImageToTweet={addImageToTweet}
+              fileInputRef={fileInputRef}
+            />
 
             <button
               disabled={!input || !session}

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Dispatch, SetStateAction, useRef } from "react";
+import React, { ChangeEvent, FC, RefObject, useRef } from "react";
 import {
   CalendarIcon,
   EmojiHappyIcon,
@@ -9,11 +9,10 @@ import {
 
 interface Props {
   addImageToTweet: (e: ChangeEvent<HTMLInputElement>) => void;
+  fileInputRef: RefObject<HTMLInputElement>;
 }
 
-const TweetBoxIcons: React.FC<Props> = ({ addImageToTweet }) => {
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
+const TweetBoxIcons: FC<Props> = ({ addImageToTweet, fileInputRef }) => {
   return (
     <div className="flex flex-1 space-x-2 text-twitter">
       <div onClick={() => fileInputRef.current?.click()}>
