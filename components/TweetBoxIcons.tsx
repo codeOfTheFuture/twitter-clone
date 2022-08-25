@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, RefObject, useRef } from "react";
+import React, { ChangeEvent, FC, RefObject } from "react";
 import {
   CalendarIcon,
   EmojiHappyIcon,
@@ -6,6 +6,7 @@ import {
   PhotographIcon,
   SearchCircleIcon,
 } from "@heroicons/react/outline";
+import { useSession } from "next-auth/react";
 
 interface Props {
   addImageToTweet: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -13,9 +14,15 @@ interface Props {
 }
 
 const TweetBoxIcons: FC<Props> = ({ addImageToTweet, fileInputRef }) => {
+  const { data: session } = useSession();
+
+  const handleAddImageClick = () => {
+    session && fileInputRef.current?.click()
+  }
+
   return (
     <div className="flex flex-1 space-x-2 text-twitter">
-      <div onClick={() => fileInputRef.current?.click()}>
+      <div onClick={handleAddImageClick}>
         <PhotographIcon className="h-5 w-5 cursor-pointer transition-transform duration-150 ease-out hover:scale-150" />
         <input
           type="file"

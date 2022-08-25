@@ -1,29 +1,37 @@
+import {
+  collection,
+  DocumentData,
+  getDocs,
+  orderBy,
+  query,
+  QuerySnapshot,
+} from "firebase/firestore";
 import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import { Toaster } from "react-hot-toast";
 import Feed from "../components/Feed";
 import Sidebar from "../components/Sidebar";
 import Widgets from "../components/Widgets";
+import { db } from "../firebase.setup";
 import { Tweet } from "../types/typings";
 
 interface Props {
   tweets: Tweet[];
 }
 
-const Home: NextPage<Props> = () => {
-
+const Home: NextPage<Props> = ({ tweets }) => {
   return (
-    <div className='lg:max-w-6xl mx-auto h-screen overflow-hidden'>
+    <div className="lg:max-w-6xl mx-auto h-screen overflow-hidden">
       <Head>
         <title>Twitter Clone</title>
       </Head>
 
       <Toaster />
 
-      <main className='grid grid-cols-9'>
+      <main className="grid grid-cols-9">
         <Sidebar />
 
-        <Feed />
+        <Feed tweets={tweets} />
 
         <Widgets />
       </main>
@@ -33,12 +41,20 @@ const Home: NextPage<Props> = () => {
 
 export default Home;
 
-// export const getServerSideProps: GetServerSideProps = async () => {
-//   const tweets = await fetchTweets();
+export const getServerSideProps: GetServerSideProps = async () => {
+  const q = query(collection(db, "tweets"), orderBy("timestamp", "desc"));
+  const querySnapshot: QuerySnapshot<DocumentData> = await getDocs(q);
 
-//   return {
-//     props: {
-//       tweets,
-//     },
-//   };
-// };
+  const tweets = querySnapshot.docs
+    .map((doc: DocumentData) => doc.data())
+    .map((tweet: Tweet) => ({
+      ...tweet,
+      timestamp: new Date(tweet.timestamp.toDate()).toLocaleString(),
+    }));
+
+  return {
+    props: {
+      tweets,
+    },
+  };
+};

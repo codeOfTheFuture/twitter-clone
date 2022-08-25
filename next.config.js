@@ -8,6 +8,7 @@ const nextConfig = {
       "pbs.twimg.com",
       "th.bing.com",
       "cdn.sanity.io",
+      "firebasestorage.googleapis.com",
     ],
   },
 };

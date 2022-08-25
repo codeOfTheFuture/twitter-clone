@@ -1,8 +1,7 @@
 import { RefreshIcon } from "@heroicons/react/outline";
 import { Tweet } from "../types/typings";
 import TweetBox from "./TweetBox";
-import { useState } from "react";
-import { fetchTweets } from "../utils/fetchTweets";
+import { FC, useState } from "react";
 import Tweets from "./Tweets";
 import toast from "react-hot-toast";
 
@@ -10,7 +9,7 @@ interface Props {
   tweets: Tweet[];
 }
 
-const Feed: React.FC = () => {
+const Feed: FC<Props> = ({ tweets }) => {
   // const [tweetsToShow, setTweetsToShow] = useState<Tweet[]>(tweets);
 
   // const handleRefresh = async () => {
@@ -38,7 +37,7 @@ const Feed: React.FC = () => {
         <TweetBox />
       </div>
 
-      <Tweets />
+      <Tweets tweets={tweets} />
     </div>
   )
 }
