@@ -2,6 +2,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import TimeAgo from "react-timeago";
 import { Tweet } from "../types/typings";
+import BlueCheck from "./BlueCheck";
 import Replies from "./Replies";
 import TweetIcons from "./TweetIcons";
 
@@ -37,7 +38,9 @@ const Tweet: React.FC<Props> = ({ tweet }) => {
 
         <div>
           <div className="flex items-center space-x-1">
-            <span className="mr-1 font-bold">{userHandle}</span>
+            <span className="font-bold">{userHandle}</span>
+
+            <BlueCheck />
 
             <span className="hidden text-sm text-gray-500 sm:inline">
               @{userHandle} &middot;
@@ -49,7 +52,7 @@ const Tweet: React.FC<Props> = ({ tweet }) => {
       </div>
 
       <div className="flex flex-col items-start pl-10">
-        <p className="pb-2">{tweetText}</p>
+        <p className="pb-2 font-medium">{tweetText}</p>
 
         {tweetImage && (
           <div className="relative w-full h-[40rem] rounded-lg shadow-sm">

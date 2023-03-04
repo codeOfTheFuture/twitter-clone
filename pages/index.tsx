@@ -21,14 +21,19 @@ interface Props {
 
 const Home: NextPage<Props> = ({ tweets }) => {
   return (
-    <div className="lg:max-w-6xl mx-auto h-screen overflow-hidden">
+    <div className="lg:max-w-7xl mx-auto">
       <Head>
-        <title>Twitter Clone</title>
+        <link
+          rel="shortcut icon"
+          href="/twitter-favicon.ico"
+          type="image/x-icon"
+        />
+        <title>Home / Twitter Clone</title>
       </Head>
 
       <Toaster />
 
-      <main className="grid grid-cols-9">
+      <main className="grid grid-cols-10">
         <Sidebar />
 
         <Feed tweets={tweets} />

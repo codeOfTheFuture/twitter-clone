@@ -17,6 +17,8 @@ import { signIn, signOut, useSession } from "next-auth/react";
 const Sidebar: React.FC = () => {
   const { data: session } = useSession();
 
+  console.log("session", session);
+
   return (
     <div className="flex flex-col col-span-2 items-center px-2 md:items-start">
       <div className="h-10 w-10 m-3 relative">
