@@ -1,6 +1,7 @@
-import React, { FC } from 'react';
-import { Tweet } from '../types/typings';
-import TweetComponent from '../components/Tweet';
+import React, { FC } from "react";
+import { Tweet } from "../types/typings";
+import TweetComponent from "../components/Tweet";
+import { DocumentData } from "firebase/firestore";
 
 interface Props {
   tweets: Tweet[];
@@ -10,11 +11,11 @@ const Tweets: FC<Props> = ({ tweets }) => {
   console.log(tweets);
   return (
     <div>
-      {tweets?.map((tweet, i) => (
+      {tweets?.map((tweet: Tweet, i: number) => (
         <TweetComponent key={i} tweet={tweet} />
       ))}
     </div>
-  )
-}
+  );
+};
 
 export default Tweets;

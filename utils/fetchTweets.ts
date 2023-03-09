@@ -1,10 +1,15 @@
 import { Tweet } from "../types/typings";
 
-export const fetchTweets = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/getTweets`);
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-  const data = await res.json(),
-    tweets: Tweet[] = data.tweets;
+export const fetchTweets = async (): Promise<Tweet[]> => {
+  try {
+    const res = await fetch(`${BASE_URL}/api/tweets`);
+    const tweets: Tweet[] = await res.json();
 
-  return tweets;
+    return tweets;
+  } catch (error) {
+    // console.error(error);
+    throw error;
+  }
 };
