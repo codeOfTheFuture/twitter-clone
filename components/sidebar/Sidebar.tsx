@@ -1,5 +1,5 @@
 import React from "react";
-import { DotsVerticalIcon } from "@heroicons/react/solid";
+import { DotsHorizontalIcon } from "@heroicons/react/solid";
 import {
   BellIcon,
   HashtagIcon,
@@ -15,6 +15,7 @@ import SidebarRow from "./SidebarRow";
 import Image from "next/image";
 import { signIn, signOut, useSession } from "next-auth/react";
 import SidebarButton from "./SidebarButton";
+import ProfileInfo from "./ProfileInfo";
 
 const Sidebar: React.FC = () => {
   const { data: session } = useSession();
@@ -45,28 +46,16 @@ const Sidebar: React.FC = () => {
         />
         <SidebarRow Icon={DotsCircleHorizontalIcon} title="More" />
 
-        <SidebarButton className="bg-twitter text-white text-lg font-bold mt-2">
+        <SidebarButton className="bg-twitter hover:bg-twitterDark text-white text-lg font-bold mt-2">
           Tweet
         </SidebarButton>
       </div>
 
       <SidebarButton
-        className="text-sm bg-white hover:bg-gray-100 text-gray-500 mb-2"
+        className="flex justify-between items-center text-sm bg-white hover:bg-gray-200 text-gray-500 mb-2"
         onClick={() => {}}>
-        <div className="relative">
-          <Image
-            src={session?.user?.image!}
-            alt="Profile Image"
-            width={40}
-            height={40}
-            className="absolute top-0 left-0 rounded-full"
-          />
-        </div>
-        <div>
-          <p className="font-semibold">{session?.user?.name}</p>
-          <p>@{session?.user?.name?.split(" ").join("").toLowerCase()}</p>
-        </div>
-        <div className="bg-blue-400 w-5 h-5"></div>
+        <ProfileInfo />
+        <DotsHorizontalIcon className="w-6 h-6" />
       </SidebarButton>
     </div>
   );
