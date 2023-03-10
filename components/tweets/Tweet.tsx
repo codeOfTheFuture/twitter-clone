@@ -1,9 +1,9 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import TimeAgo from "react-timeago";
-import { Tweet } from "../types/typings";
+import { Tweet } from "../../types/typings";
 import BlueCheck from "./BlueCheck";
-import Replies from "./Replies";
+import Replies from "../replies/Replies";
 import TweetIcons from "./TweetIcons";
 
 interface Props {

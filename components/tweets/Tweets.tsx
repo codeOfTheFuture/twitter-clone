@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import { Tweet } from "../types/typings";
-import TweetComponent from "../components/Tweet";
+import { Tweet } from "../../types/typings";
+import TweetComponent from "./Tweet";
 import { DocumentData } from "firebase/firestore";
 
 interface Props {

@@ -1,8 +1,8 @@
 import { RefreshIcon } from "@heroicons/react/outline";
-import { Tweet } from "../types/typings";
-import TweetBox from "./TweetBox";
+import { Tweet } from "../../types/typings";
+import TweetBox from "../tweetbox/TweetBox";
 import { FC, useState } from "react";
-import Tweets from "./Tweets";
+import Tweets from "../tweets/Tweets";
 import toast from "react-hot-toast";
 
 interface Props {

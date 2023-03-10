@@ -16,7 +16,7 @@ import {
   uploadString,
   getDownloadURL,
 } from "firebase/storage";
-import { db, storage } from "../firebase.setup";
+import { db, storage } from "../../firebase.setup";
 
 const TweetBox: FC = () => {
   const { data: session } = useSession(),
@@ -109,8 +109,7 @@ const TweetBox: FC = () => {
             <button
               disabled={!session || (session && !tweetText && !tweetImage)}
               className="bg-twitter px-5 py-2 font-bold text-white rounded-full disabled:opacity-40"
-              type="submit"
-            >
+              type="submit">
               Tweet
             </button>
           </div>

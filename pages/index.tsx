@@ -1,9 +1,9 @@
 import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import { Toaster } from "react-hot-toast";
-import Feed from "../components/Feed";
-import Sidebar from "../components/Sidebar";
-import Widgets from "../components/Widgets";
+import Feed from "../components/feed/Feed";
+import Sidebar from "../components/sidebar/Sidebar";
+import Widgets from "../components/widgets/Widgets";
 import { Tweet } from "../types/typings";
 import { fetchTweets } from "../utils/fetchTweets";
 
