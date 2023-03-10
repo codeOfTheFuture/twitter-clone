@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { DotsHorizontalIcon } from "@heroicons/react/solid";
 import {
   BellIcon,
@@ -16,11 +16,11 @@ import Image from "next/image";
 import { signIn, signOut, useSession } from "next-auth/react";
 import SidebarButton from "./SidebarButton";
 import ProfileInfo from "./ProfileInfo";
+import { ModalContext } from "../../contexts/ModalContext";
 
 const Sidebar: React.FC = () => {
   const { data: session } = useSession();
-
-  const openTweetBoxModel = () => {};
+  const { openModal } = useContext(ModalContext);
 
   return (
     <div className="flex flex-col h-screen col-span-2 justify-between items-center px-2 md:items-start">
@@ -48,7 +48,7 @@ const Sidebar: React.FC = () => {
 
         <SidebarButton
           className="bg-twitter hover:bg-twitterDark text-white text-lg font-bold mt-2"
-          onClick={openTweetBoxModel}>
+          onClick={openModal}>
           Tweet
         </SidebarButton>
       </div>

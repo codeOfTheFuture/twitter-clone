@@ -10,6 +10,7 @@
     "test": "jest --watch --detectOpenHandles"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.13",
     "@heroicons/react": "^1.0.6",
     "firebase": "^9.17.2",
     "next": "^13.2.3",

@@ -1,6 +1,8 @@
 import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import { Toaster } from "react-hot-toast";
+import Modal from "../components/modal/Modal";
+import TweetBox from "../components/tweetbox/TweetBox";
 import Feed from "../components/feed/Feed";
 import Sidebar from "../components/sidebar/Sidebar";
 import Widgets from "../components/widgets/Widgets";
@@ -26,6 +28,10 @@ const Home = ({ tweets }: Props) => {
       <Toaster />
 
       <main className="grid grid-cols-10">
+        <Modal>
+          <TweetBox />
+        </Modal>
+
         <Sidebar />
 
         <Feed tweets={tweets} />
