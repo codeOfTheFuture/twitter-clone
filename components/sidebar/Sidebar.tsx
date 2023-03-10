@@ -20,7 +20,7 @@ import ProfileInfo from "./ProfileInfo";
 const Sidebar: React.FC = () => {
   const { data: session } = useSession();
 
-  console.log("session", session);
+  const openTweetBoxModel = () => {};
 
   return (
     <div className="flex flex-col h-screen col-span-2 justify-between items-center px-2 md:items-start">
@@ -46,7 +46,9 @@ const Sidebar: React.FC = () => {
         />
         <SidebarRow Icon={DotsCircleHorizontalIcon} title="More" />
 
-        <SidebarButton className="bg-twitter hover:bg-twitterDark text-white text-lg font-bold mt-2">
+        <SidebarButton
+          className="bg-twitter hover:bg-twitterDark text-white text-lg font-bold mt-2"
+          onClick={openTweetBoxModel}>
           Tweet
         </SidebarButton>
       </div>
