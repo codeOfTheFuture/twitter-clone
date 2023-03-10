@@ -77,7 +77,7 @@ const TweetBox: FC = () => {
       <div className="mt-4 h-14 w-14 relative">
         <Image
           src={session?.user?.image || "/images/avatar-placeholder.jpg"}
-          layout="fill"
+          fill
           alt="avatar"
           className="absolute object-cover rounded-full"
         />

@@ -26,7 +26,7 @@ const Tweet: React.FC<Props> = ({ tweet }) => {
   // const replyCount = replies.length || 0;
 
   return (
-    <div className="flex flex-col space-x-3 p-5 border-y border-gray-100">
+    <div className="flex flex-col space-x-3 p-4 cursor-pointer border-y border-gray-100 hover:bg-gray-50">
       <div className="flex items-center space-x-3">
         <Image
           width={40}
@@ -57,17 +57,21 @@ const Tweet: React.FC<Props> = ({ tweet }) => {
         {tweetImage && (
           <div className="relative w-full h-[40rem] rounded-lg shadow-sm">
             <Image
-              className="rounded-lg object-center"
-              layout="fill"
+              className="rounded-lg object-center object-cover"
+              fill
               src={tweetImage}
-              objectFit="cover"
               alt=""
             />
           </div>
         )}
       </div>
 
-      <TweetIcons replyCount={2} />
+      <TweetIcons
+        replyCount={2450}
+        retweetCount={4120}
+        likeCount={31233}
+        viewCount={56788}
+      />
 
       {/* Reply Box logic */}
 

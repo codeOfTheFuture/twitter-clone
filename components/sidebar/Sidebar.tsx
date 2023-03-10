@@ -29,7 +29,7 @@ const Sidebar: React.FC = () => {
           <Image
             src="/images/logo-twitter-icon-symbol-0.png"
             alt="Twitter logo"
-            layout="fill"
+            fill
             className="absolute"
           />
         </div>
@@ -47,7 +47,7 @@ const Sidebar: React.FC = () => {
         <SidebarRow Icon={DotsCircleHorizontalIcon} title="More" />
 
         <SidebarButton
-          className="bg-twitter hover:bg-twitterDark text-white text-lg font-bold mt-2"
+          className="bg-twitter hover:bg-twitterDark hover:shadow-md text-white text-lg font-bold mt-2"
           onClick={openModal}>
           Tweet
         </SidebarButton>

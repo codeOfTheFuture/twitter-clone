@@ -38,7 +38,7 @@ const Modal = ({ children }: Props) => {
               onClick={closeModal}>
               <XIcon className="w-5 h-5 text-gray-600" />
             </button>
-            {isModalOpen && children}
+            {children}
           </span>
         </div>
       </Dialog>
