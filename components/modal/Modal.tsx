@@ -25,10 +25,7 @@ const Modal = ({ children }: Props) => {
             leave="ease-in duration-200"
             leaveFrom="opacity-100"
             leaveTo="opacity-0">
-            <Dialog.Overlay
-              className="fixed inset-0 bg-gray-500 opacity-75"
-              data-testid="overlay"
-            />
+            <Dialog.Overlay className="fixed inset-0 bg-gray-500 opacity-75" />
           </Transition.Child>
 
           <span
