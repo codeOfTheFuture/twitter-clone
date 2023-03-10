@@ -25,7 +25,10 @@ const Modal = ({ children }: Props) => {
             leave="ease-in duration-200"
             leaveFrom="opacity-100"
             leaveTo="opacity-0">
-            <Dialog.Overlay className="fixed inset-0 bg-gray-500 opacity-75" />
+            <Dialog.Overlay
+              className="fixed inset-0 bg-gray-500 opacity-75"
+              data-testid="overlay"
+            />
           </Transition.Child>
 
           <span
@@ -33,12 +36,12 @@ const Modal = ({ children }: Props) => {
             role="dialog"
             aria-modal="true"
             aria-labelledby="modal-headline">
-            <div
+            <button
               className="flex justify-center items-center w-8 h-8 rounded-full hover:bg-gray-200"
               onClick={closeModal}>
               <XIcon className="w-5 h-5 text-gray-600" />
-            </div>
-            {children}
+            </button>
+            {isModalOpen && children}
           </span>
         </div>
       </Dialog>
