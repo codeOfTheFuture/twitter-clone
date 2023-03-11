@@ -10,10 +10,17 @@ interface Props {
   tweet: Tweet;
 }
 
-const Tweet: React.FC<Props> = ({ tweet }) => {
+const Tweet = ({ tweet }: Props) => {
   // const [replies, setReplies] = useState<Reply[]>([]);
 
-  const { userHandle, profileImg, timestamp, tweetText, tweetImage } = tweet;
+  const {
+    userName,
+    userHandle,
+    profileImage,
+    timestamp,
+    tweetText,
+    tweetImage,
+  } = tweet;
 
   // useEffect(() => {
   //   (async () => {
@@ -32,13 +39,13 @@ const Tweet: React.FC<Props> = ({ tweet }) => {
           width={40}
           height={40}
           className="rounded-full object-cover"
-          src={profileImg}
-          alt={profileImg}
+          src={profileImage}
+          alt="Profile Image"
         />
 
         <div>
           <div className="flex items-center space-x-1">
-            <span className="font-bold">{userHandle}</span>
+            <span className="font-bold">{userName}</span>
 
             <BlueCheck />
 

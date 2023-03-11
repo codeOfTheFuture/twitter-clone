@@ -1,31 +1,21 @@
-import React, { ChangeEvent, FC, FormEvent, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, useRef, useState } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import TweetBoxIcons from "./TweetBoxIcons";
 import TweetBoxImagePreview from "./TweetBoxImagePreview";
-import {
-  collection,
-  doc,
-  addDoc,
-  setDoc,
-  serverTimestamp,
-} from "firebase/firestore";
-import {
-  getStorage,
-  ref,
-  uploadString,
-  getDownloadURL,
-} from "firebase/storage";
-import { db, storage } from "../../firebase.setup";
+import { addTweet } from "../../utils/addTweet";
+import { Tweet } from "../../types/typings";
+import { toast } from "react-hot-toast";
 
-const TweetBox: FC = () => {
-  const { data: session } = useSession(),
-    [tweetText, setTweetText] = useState<string>(""),
-    [tweetImage, setTweetImage] = useState<string | null>(null);
+const TweetBox = () => {
+  const { data: session } = useSession();
+  const [tweetText, setTweetText] = useState<string>("");
+  const [tweetImage, setTweetImage] = useState<string | null>(null);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const userHandle = session?.user?.name?.replace(/\s+/g, "").toLowerCase();
+  const userName = session?.user?.name!;
+  const userHandle = session?.user?.name?.replace(/\s+/g, "").toLowerCase()!;
+  const profileImage = session?.user?.image!;
 
   const addImageToTweet = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] as File;
@@ -40,36 +30,35 @@ const TweetBox: FC = () => {
   };
 
   const resetTweetImage = () => {
-    fileInputRef!.current!.value = "";
-    setTweetText("");
+    fileInputRef.current!.value = "";
     setTweetImage(null);
   };
 
-  const sendTweet = async (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    try {
-      const newDoc = await addDoc(collection(db, "tweets"), {
-        tweetText: tweetText,
-        userHandle: userHandle,
-        profileImg: session?.user?.image,
-        tweetImage: tweetImage,
-        timestamp: serverTimestamp(),
-      });
+    const addTweetToast = toast.loading("Sending Tweet...");
 
-      if (tweetImage) {
-        const storageRef = ref(storage, `tweets/${newDoc.id}`);
-        await uploadString(storageRef, tweetImage, "data_url");
-        const url = await getDownloadURL(storageRef);
-        const tweetRef = doc(db, "tweets", newDoc.id);
+    const tweetData = {} as Tweet;
+    tweetData.userName = userName;
+    tweetData.userHandle = userHandle;
+    tweetData.profileImage = profileImage;
+    tweetData.tweetText = tweetText;
 
-        await setDoc(tweetRef, { tweetImage: url }, { merge: true });
-
-        resetTweetImage();
-      }
-    } catch (error: any) {
-      console.error(error);
+    if (tweetImage) {
+      tweetData.tweetImage = tweetImage;
     }
+
+    const response = await addTweet(tweetData);
+
+    console.log(response);
+
+    setTweetText("");
+    resetTweetImage();
+
+    toast.success("Tweet Sent!", {
+      id: addTweetToast,
+    });
   };
 
   return (
@@ -84,7 +73,7 @@ const TweetBox: FC = () => {
       </div>
 
       <div className="flex flex-1 items-center pl-2">
-        <form className="flex flex-1 flex-col" onSubmit={sendTweet}>
+        <form className="flex flex-1 flex-col" onSubmit={handleSubmit}>
           <input
             value={tweetText}
             type="text"

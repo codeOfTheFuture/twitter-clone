@@ -1,8 +1,9 @@
 interface Tweet {
+  userName: string;
   userHandle: string;
+  profileImage: string;
   tweetText: string;
-  tweetImage: string;
-  profileImg: string;
+  tweetImage?: string;
   timestamp: any;
 }
 

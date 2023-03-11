@@ -13,12 +13,12 @@ interface Props {
   fileInputRef: RefObject<HTMLInputElement>;
 }
 
-const TweetBoxIcons: FC<Props> = ({ addImageToTweet, fileInputRef }) => {
+const TweetBoxIcons = ({ addImageToTweet, fileInputRef }: Props) => {
   const { data: session } = useSession();
 
   const handleAddImageClick = () => {
-    session && fileInputRef.current?.click()
-  }
+    session && fileInputRef.current?.click();
+  };
 
   return (
     <div className="flex flex-1 space-x-2 text-twitter">

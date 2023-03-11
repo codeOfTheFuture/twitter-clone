@@ -1,10 +1,18 @@
 import { RefreshIcon } from "@heroicons/react/outline";
 import { Tweet } from "../../types/typings";
 import TweetBox from "../tweetbox/TweetBox";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Tweets from "../tweets/Tweets";
 import toast from "react-hot-toast";
 import { fetchTweets } from "../../utils/fetchTweets";
+import {
+  collection,
+  DocumentData,
+  onSnapshot,
+  orderBy,
+  query,
+} from "firebase/firestore";
+import { db } from "../../firebase.setup";
 
 interface Props {
   tweets: Tweet[];
@@ -12,6 +20,24 @@ interface Props {
 
 const Feed = ({ tweets: tweetProps }: Props) => {
   const [tweets, setTweets] = useState<Tweet[]>(tweetProps);
+
+  useEffect(
+    () =>
+      onSnapshot(
+        query(collection(db, "tweets"), orderBy("timestamp", "desc")),
+        (snapshot: DocumentData) =>
+          setTweets(
+            snapshot.docs.map((doc: DocumentData) => ({
+              ...doc.data(),
+              id: doc.id,
+              timestamp: new Date(
+                doc.data().timestamp.toDate()
+              ).toLocaleString(),
+            }))
+          )
+      ),
+    [db]
+  );
 
   const handleRefresh = async () => {
     const refreshToast = toast.loading("Refreshing...", {
