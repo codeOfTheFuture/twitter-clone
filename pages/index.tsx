@@ -1,4 +1,4 @@
-import type { GetServerSideProps, NextPage } from "next";
+import type { GetServerSideProps } from "next";
 import Head from "next/head";
 import { Toaster } from "react-hot-toast";
 import Modal from "../components/modal/Modal";
@@ -48,8 +48,6 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<{
   props: { tweets: Tweet[] };
 }> => {
   const tweets = await fetchTweets();
-
-  console.log("tweets gssp>>", tweets);
 
   return {
     props: {

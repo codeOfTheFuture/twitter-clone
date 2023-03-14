@@ -41,7 +41,7 @@ const handler = nc({
     res.status(200).json(tweets);
   })
   .post(async (req: NextApiRequest, res: NextApiResponse) => {
-    const tweetToAdd = JSON.parse(req.body);
+    const tweetToAdd: Tweet = JSON.parse(req.body);
 
     tweetToAdd.timestamp = serverTimestamp();
 

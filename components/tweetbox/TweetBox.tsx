@@ -6,18 +6,28 @@ import TweetBoxImagePreview from "./TweetBoxImagePreview";
 import { addTweet } from "../../utils/addTweet";
 import { Tweet } from "../../types/typings";
 import { toast } from "react-hot-toast";
+import TextArea from "./TextArea";
+import { ICurorChangeDetail } from "tweet-textarea-react/src/lib/types";
+import TweetButton from "./TweetButton";
+import CharacterCounter from "./CharacterCounter";
+import AddButton from "./AddButton";
 
 const TweetBox = () => {
   const { data: session } = useSession();
   const [tweetText, setTweetText] = useState<string>("");
   const [tweetImage, setTweetImage] = useState<string | null>(null);
+  const [charCount, setCharCount] = useState<number>(0);
+  const [textCursorPosition, setTextCursorPosition] =
+    useState<ICurorChangeDetail>({ start: 0, end: 0 });
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+
   const userName = session?.user?.name!;
   const userHandle = session?.user?.name?.replace(/\s+/g, "").toLowerCase()!;
   const profileImage = session?.user?.image!;
+  const limit = 280;
 
-  const addImageToTweet = (e: ChangeEvent<HTMLInputElement>) => {
+  const addImageToTweet = (e: ChangeEvent<HTMLInputElement>): void => {
     const file = e.target.files?.[0] as File;
 
     if (file) {
@@ -29,12 +39,12 @@ const TweetBox = () => {
     }
   };
 
-  const resetTweetImage = () => {
+  const resetTweetImage = (): void => {
     fileInputRef.current!.value = "";
     setTweetImage(null);
   };
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
 
     const addTweetToast = toast.loading("Sending Tweet...");
@@ -61,6 +71,17 @@ const TweetBox = () => {
     });
   };
 
+  const handleTextUpdate = (text: string): void => {
+    setTweetText(text);
+    setCharCount(text.length);
+  };
+
+  const handleCursorPositionChange = (
+    event: CustomEvent<ICurorChangeDetail>
+  ): void => {
+    setTextCursorPosition(event.detail);
+  };
+
   return (
     <div className="flex space-x-2 p-5">
       <div className="mt-4 h-14 w-14 relative">
@@ -74,12 +95,11 @@ const TweetBox = () => {
 
       <div className="flex flex-1 items-center pl-2">
         <form className="flex flex-1 flex-col" onSubmit={handleSubmit}>
-          <input
-            value={tweetText}
-            type="text"
-            placeholder="What's Happening?"
-            className="h-24 w-full text-xl outline-none placeholder:text-xl"
-            onChange={e => setTweetText(e.target.value)}
+          <TextArea
+            tweetText={tweetText}
+            handleTextUpdate={handleTextUpdate}
+            textCursorPosition={textCursorPosition}
+            handleCursorPositionChange={handleCursorPositionChange}
           />
 
           {tweetImage && (
@@ -95,12 +115,24 @@ const TweetBox = () => {
               fileInputRef={fileInputRef}
             />
 
-            <button
-              disabled={!session || (session && !tweetText && !tweetImage)}
-              className="bg-twitter px-5 py-2 font-bold text-white rounded-full disabled:opacity-40"
-              type="submit">
-              Tweet
-            </button>
+            <div className="flex items-center space-x-4">
+              {charCount > 0 && (
+                <>
+                  <CharacterCounter charCount={charCount} limit={limit} />
+
+                  <hr className="h-8 border border-gray-200" />
+
+                  <AddButton />
+                </>
+              )}
+
+              <TweetButton
+                tweetText={tweetText}
+                tweetImage={tweetImage}
+                charCount={charCount}>
+                Tweet
+              </TweetButton>
+            </div>
           </div>
         </form>
       </div>
