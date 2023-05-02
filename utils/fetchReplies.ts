@@ -1,9 +1,9 @@
-import { Reply } from "../types/typings";
+// import { Reply } from "../types/typings";
 
 export const fetchReplies = async (tweetId: string) => {
-  const res = await fetch(`/api/getReplies?tweetId=${tweetId}`);
+	const res = await fetch(`/api/getReplies?tweetId=${tweetId}`);
 
-  const replies: Reply[] = await res.json();
+	const replies = await res.json();
 
-  return replies;
+	return replies;
 };

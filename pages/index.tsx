@@ -10,48 +10,44 @@ import { Tweet } from "../types/typings";
 import { fetchTweets } from "../utils/fetchTweets";
 
 interface Props {
-  tweets: Tweet[];
+	tweets: Tweet[];
 }
 
-const Home = ({ tweets }: Props) => {
-  return (
-    <div className="lg:max-w-7xl mx-auto">
-      <Head>
-        <link
-          rel="shortcut icon"
-          href="/twitter-favicon.ico"
-          type="image/x-icon"
-        />
-        <title>Home / Twitter Clone</title>
-      </Head>
+const HomePage = ({ tweets }: Props) => {
+	return (
+		<div className="lg:max-w-7xl mx-auto">
+			<Head>
+				<link rel="shortcut icon" href="/twitter-favicon.ico" type="image/x-icon" />
+				<title>Home / Twitter Clone</title>
+			</Head>
 
-      <Toaster />
+			<Toaster />
 
-      <main className="grid grid-cols-10">
-        <Modal>
-          <TweetBox />
-        </Modal>
+			<main className="grid grid-cols-10">
+				<Modal>
+					<TweetBox />
+				</Modal>
 
-        <Sidebar />
+				<Sidebar />
 
-        <Feed tweets={tweets} />
+				<Feed tweets={tweets} />
 
-        <Widgets />
-      </main>
-    </div>
-  );
+				<Widgets />
+			</main>
+		</div>
+	);
 };
 
-export default Home;
+export default HomePage;
 
 export const getServerSideProps: GetServerSideProps = async (): Promise<{
-  props: { tweets: Tweet[] };
+	props: { tweets: Tweet[] };
 }> => {
-  const tweets = await fetchTweets();
+	const tweets = await fetchTweets();
 
-  return {
-    props: {
-      tweets,
-    },
-  };
+	return {
+		props: {
+			tweets,
+		},
+	};
 };
