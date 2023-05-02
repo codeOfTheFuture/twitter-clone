@@ -1,9 +1,0 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer components {
-  .tweet-icon {
-    @apply h-5 w-5;
-  }
-}
