@@ -1,24 +1,17 @@
-import Image from "next/image";
 import { useSession } from "next-auth/react";
-
-const DEFAULT_AVATAR = "/images/avatar-placeholder.jpg";
+import ProfileImage from "../ui/ProfileImage";
 
 const ProfileInfo = () => {
-	const { data: session } = useSession();
+	const userName = useSession().data?.user?.name;
+	const userHandle = useSession().data?.user?.name?.split(" ").join("").toLowerCase();
 
 	return (
 		<div className="flex">
-			<div className="relative w-12 h-12 lg:w-10 lg:h-10 rounded-full">
-				<Image
-					src={session?.user?.image! || DEFAULT_AVATAR}
-					alt="Profile Image"
-					className="rounded-full object-contain"
-					fill
-				/>
-			</div>
+			<ProfileImage className="w-12 h-12 lg:w-10 lg:h-10" />
+
 			<div className="hidden lg:flex flex-col mx-2">
-				<span className="font-semibold">{session?.user?.name}</span>
-				<span>@{session?.user?.name?.split(" ").join("").toLowerCase()}</span>
+				<span className="font-semibold">{userName}</span>
+				<span>@{userHandle}</span>
 			</div>
 		</div>
 	);

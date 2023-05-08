@@ -19,10 +19,7 @@ interface ModalProviderProps {
 const ModalProvider = ({ children }: ModalProviderProps) => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
-	const openModal = () => {
-		console.log("Open Model");
-		setIsModalOpen(true);
-	};
+	const openModal = () => setIsModalOpen(true);
 	const closeModal = () => setIsModalOpen(false);
 
 	return (

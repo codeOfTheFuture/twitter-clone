@@ -1,5 +1,4 @@
 import { ChangeEvent, FormEvent, RefObject, useRef, useState } from "react";
-import Image from "next/image";
 import { CompositeDecorator, EditorState } from "draft-js";
 import { useSession } from "next-auth/react";
 import { toast } from "react-hot-toast";
@@ -13,8 +12,8 @@ import { constructTweet } from "../../../utils/constructTweet";
 import { addTweet } from "../../../utils/addTweet";
 import { createCompositeDecorator } from "../../../utils/createCompositeDecorator";
 import { TweetData } from "../../../types/typings";
+import ProfileImage from "../../../components/ui/ProfileImage";
 
-const DEFAULT_AVATAR = "/images/avatar-placeholder.jpg";
 const COMPOSITE_DECORATOR: CompositeDecorator = createCompositeDecorator();
 const LIMIT = 280;
 
@@ -22,11 +21,11 @@ const TweetBox = () => {
 	const [editorState, setEditorState] = useState<EditorState>(
 		EditorState.createEmpty(COMPOSITE_DECORATOR)
 	);
-	const tweetText: string = editorState.getCurrentContent().getPlainText();
-	const charCount: number = editorState.getCurrentContent().getPlainText().length;
-	console.log("Tweet Text: ", tweetText);
 	const [tweetImage, setTweetImage] = useState<string | null>(null);
 	const fileInputRef: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
+
+	const tweetText: string = editorState.getCurrentContent().getPlainText();
+	const charCount: number = editorState.getCurrentContent().getPlainText().length;
 
 	const userName: string = useSession().data?.user?.name!;
 	const userHandle: string = useSession().data?.user?.name?.replace(/\s+/g, "").toLowerCase()!;
@@ -64,8 +63,6 @@ const TweetBox = () => {
 
 		const response: { message: string } = await addTweet(newTweet);
 
-		console.log(response);
-
 		resetTweetImage();
 
 		toast.success(response.message, {
@@ -75,14 +72,7 @@ const TweetBox = () => {
 
 	return (
 		<div className="flex space-x-2 w-full p-4">
-			<div className="mt-4 h-14 w-14 relative">
-				<Image
-					src={profileImage || DEFAULT_AVATAR}
-					fill
-					alt="avatar"
-					className="absolute object-cover rounded-full"
-				/>
-			</div>
+			<ProfileImage className="h-14 w-14 mt-4" />
 
 			<div className="flex flex-grow items-center pl-2">
 				<form className="flex flex-1 flex-col" onSubmit={handleSubmit}>
@@ -102,7 +92,7 @@ const TweetBox = () => {
 
 									<hr className="h-8 border border-gray-200" />
 
-									<AddButton />
+									<AddButton onClick={() => {}} />
 								</>
 							)}
 

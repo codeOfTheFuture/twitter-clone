@@ -1,15 +1,30 @@
-import { act, render } from "@testing-library/react";
+import { render } from "@testing-library/react";
+import { act } from "react-dom/test-utils";
+import { SessionProvider, useSession } from "next-auth/react";
 import IndexPage from "../pages/index";
-import { SessionProvider } from "next-auth/react";
-import { Session } from "next-auth";
+
+const mockSession = {
+	user: {
+		name: "John Doe",
+		email: "john.doe@example.com",
+		image: "https://example.com/avatar.png",
+	},
+	accessToken: "mock_access_token",
+	expires: (new Date().getTime() + 30).toLocaleString(),
+};
+
+jest.mock("next-auth/react", () => ({
+	...jest.requireActual("next-auth/react"),
+	useSession: jest.fn(),
+}));
 
 describe("IndexPage", () => {
-	const session = {} as Session;
-
 	it("renders without crashing", async () => {
-		await act(() => {
+		(useSession as jest.Mock).mockReturnValue([mockSession, false]);
+
+		await act(async () => {
 			render(
-				<SessionProvider session={session}>
+				<SessionProvider session={mockSession}>
 					<IndexPage tweets={[]} />
 				</SessionProvider>
 			);

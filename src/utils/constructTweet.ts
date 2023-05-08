@@ -20,7 +20,7 @@ export const constructTweet = ({
 	profileImage,
 	tweetText,
 	tweetImage,
-}: TweetData) => {
+}: TweetData): TweetData => {
 	const requiredFields: string[] = [userName, userHandle, profileImage, tweetText];
 
 	for (const field of requiredFields) {

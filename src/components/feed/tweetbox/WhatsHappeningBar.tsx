@@ -24,7 +24,7 @@ const WhatsHappeningBar = ({ editorState, setEditorState }: Props) => {
 	return (
 		<div className="py-5 cursor-text">
 			<div
-				className="w-auto min-h-[4rem] text-lg md:text-xl lg:text-2xl py-4 pr-4 text-black bg-white"
+				className="w-[27vw] min-h-[4rem] text-lg md:text-xl lg:text-2xl py-4 pr-4 text-black bg-white"
 				onClick={handleFocus}
 			>
 				<Editor {...editorProps} ref={editorRef} />

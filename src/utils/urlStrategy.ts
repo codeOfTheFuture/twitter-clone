@@ -3,15 +3,22 @@ import { findURLsWithRegex } from "./findUrlsWithRegex";
 
 type Callback = (start: number, end: number) => void;
 
+/**
+ * The regular expression used to match URLs.
+ *
+ * Matches URLs that start with "http://", "https://", or "www." and contain only letters, numbers, underscores, hyphens, and periods.
+ */
+
 const URL_REGEX =
 	/(?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9_-]+(?:\.[a-zA-Z]{2,3}(?=\b))(?:(?:\/[\w#]+)*(?:\/\w+\?[a-zA-Z0-9_]+=\w+(?:&[a-zA-Z0-9_]+=\w+)*)?)?/g;
 
-export const urlStrategy = (contentBlock: ContentBlock, cb: Callback) => {
-	const matches = findURLsWithRegex(URL_REGEX, contentBlock);
+/**
+ * Searches for URLs within a ContentBlock from Draft.js and calls a callback function with the start and end indexes of each URL.
+ *
+ * @param {ContentBlock} contentBlock - The ContentBlock from Draft.js to search within.
+ * @param {Callback} cb - A callback function to call with the start and end indexes of each URL.
+ */
 
-	for (const match of matches) {
-		const start = match.start;
-		const length = match.match[0].length;
-		cb(start, start + length);
-	}
+export const urlStrategy = (contentBlock: ContentBlock, cb: Callback) => {
+	findURLsWithRegex(URL_REGEX, contentBlock, cb);
 };

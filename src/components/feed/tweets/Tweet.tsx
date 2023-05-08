@@ -4,6 +4,7 @@ import { Tweet } from "../../../types/typings";
 import BlueCheck from "./VerifiedBlueCheck";
 import Replies from "../replies/Replies";
 import TweetIcons from "./TweetIcons";
+import ProfileImage from "../../../components/ui/ProfileImage";
 
 interface Props {
 	tweet: Tweet;
@@ -13,15 +14,12 @@ const Tweet = ({ tweet }: Props) => {
 	const { userName, userHandle, profileImage, timestamp, tweetText, tweetImage } = tweet;
 
 	return (
-		<div className="flex flex-col space-x-3 p-4 cursor-pointer border-y border-gray-100 hover:bg-gray-50">
+		<div
+			className="flex flex-col space-x-3 p-4 cursor-pointer border-y border-gray-100 hover:bg-gray-50"
+			data-testid="tweet"
+		>
 			<div className="flex items-center space-x-3">
-				<Image
-					width={40}
-					height={40}
-					className="rounded-full object-cover"
-					src={profileImage}
-					alt="Profile Image"
-				/>
+				<ProfileImage className="w-10 h-10" tweetProfileImage={profileImage} />
 
 				<div>
 					<div className="flex items-center space-x-1">
@@ -41,7 +39,12 @@ const Tweet = ({ tweet }: Props) => {
 
 				{tweetImage && (
 					<div className="relative w-full h-[40rem] rounded-lg shadow-sm">
-						<Image className="rounded-lg object-center object-cover" fill src={tweetImage} alt="" />
+						<Image
+							className="rounded-lg object-center object-cover"
+							fill
+							src={tweetImage}
+							alt={tweetImage}
+						/>
 					</div>
 				)}
 			</div>

@@ -1,9 +1,5 @@
 {
-    "cSpell.words": [
-        "firebasestorage",
-        "ggpht",
-        "storefrontier",
-        "tweetbox",
-        "twimg"
-    ]
+	"cSpell.words": ["firebasestorage", "ggpht", "johndoe", "storefrontier", "tweetbox", "twimg"],
+	"jest.jestCommandLine": "./src",
+	"jest.rootPath": "./src"
 }

@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import nc from "next-connect";
+import nextConnect, { NextConnect } from "next-connect";
 import {
 	addDoc,
 	collection,
@@ -15,7 +15,7 @@ import { db, storage } from "../../../../firebase.setup";
 import { Tweet } from "../../../types/typings";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 
-const handler = nc({
+const tweetsHandler: NextConnect<NextApiRequest, NextApiResponse> = nextConnect({
 	onError: (error, req: NextApiRequest, res: NextApiResponse) => {
 		console.error("error: ", new Error(error));
 		res.status(500).end("Internal Server Error!");
@@ -60,4 +60,4 @@ const handler = nc({
 		}
 	});
 
-export default handler;
+export default tweetsHandler;
